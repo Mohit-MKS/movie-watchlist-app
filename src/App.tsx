@@ -8,6 +8,7 @@ import Login from './components/Login';
 import MovieDetails from './components/MovieDetails';
 import Watchlist from './components/Watchlist';
 import NotFound from './components/NotFound';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           pauseOnHover
           theme="light"
         />
-        <div style={{ display: 'flex' }}>
+        <div className='app'>
           <Sidebar />
           <div className='content'> {/* Adjust padding to accommodate the sidebar */}
             <Routes>
@@ -32,8 +33,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/movie/:id" element={<MovieDetails />} />
               <Route path="/watchlist" element={<Watchlist />} />
+              <Route path="/register" element={<Register />} />
               <Route path="*" element={<NotFound />}> </Route>
-              {/* <Route path="/register" element={<Register />} />*/}
+
             </Routes>
           </div>
         </div>

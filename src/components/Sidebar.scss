@@ -23,19 +23,50 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 12px;
+    box-shadow: 0rem 0rem 5px;
   }
 
   .user-image {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 8px;
   }
 
   .user-name {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: static;
+    }
+
+    .sidebar-header {
+      margin-bottom: 0px;
+      padding: 0px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sidebar li {
+      padding: 15px;
+    }
+
+    .sidebar .user-info {
+      padding: 10px;
+    }
   }
 }

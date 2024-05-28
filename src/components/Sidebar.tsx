@@ -6,6 +6,7 @@ import defaultUserImage from "../assets/default-user.svg"; // Assuming you have 
 import "./Sidebar.scss";
 import { AppContext } from "../contexts/AppContext";
 import { UserContext } from "../models/app-context.model";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Sidebar = () => {
   const { state } = useContext(AppContext) as UserContext;
@@ -16,25 +17,28 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <h2>Watchlist</h2>
         </div>
-        <ul className="sidebar-nav">
+        <div className="sidebar-nav">
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/watchlist">Watchlist</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/login">Login</Link>
           </li>
           <li>
             <Link to="/register">Register</Link>
-          </li>
-        </ul>
+          </li> */}
+        </div>
 
-        {state.user && (
+        {state.user?.email && (
           <div className="user-info">
-            <img src={defaultUserImage} alt="User" className="user-image" />
-            <p className="user-name">{state.user}</p>
+            <div className="d-flex align-items-center">
+              <img src={defaultUserImage} alt="User" className="user-image" />
+              <p className="user-name">{state.user.name}</p>
+            </div>
+            <LogoutIcon />
           </div>
         )}
       </div>

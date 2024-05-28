@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch } from "react";
+import { IUser } from "./user.model";
 type State = {
-  user: any;
+  user: IUser | null;
   watchlist: any[];
 };
 
@@ -10,7 +11,7 @@ type UserContext = {
   dispatch: Dispatch<Action>;
 };
 
-type Action = { type: 'LOGIN'; payload: string }
+type Action = { type: 'LOGIN'; payload: IUser | null }
   | { type: 'REGISTER'; payload: any }
   | { type: 'LOGOUT' }
   | { type: 'ADD_TO_WATCHLIST'; payload: any }
