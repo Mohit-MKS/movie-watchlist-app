@@ -1,0 +1,26 @@
+.movie-detail-component {
+  .add-to-watchlist-btn {
+    position: absolute;
+    bottom: 8px;
+
+    .added-to-watchlist {
+      color: #fff;
+      background: rgb(19, 189, 47);
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background: #0d6efd;
+      color: #fff;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.75;
+    }
+  }
+}

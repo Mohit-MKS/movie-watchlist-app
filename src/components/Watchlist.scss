@@ -1,0 +1,38 @@
+.watchlist-component {
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: #212529;
+    align-items: center;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 4px;
+    height: 100%;
+    padding: 8px;
+    padding-bottom: 44px;
+    position: relative;
+  }
+
+  .add-to-watchlist-btn {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    padding: 0 8px;
+
+    button {
+      border: none;
+      outline: none;
+      background: rgb(195, 42, 42);
+      color: #fff;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.75;
+    }
+  }
+}
