@@ -5,7 +5,7 @@ import "./Sidebar.scss";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Constants } from "../services/Constants";
 import { useAppContext } from "../contexts/Contexts";
-import { StorageService } from "../services/storageService";
+import { StorageService } from "../services/StorageService";
 
 const storage = new StorageService
 

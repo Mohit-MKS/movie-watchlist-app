@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IUsersObj } from '../models/user.model';
-import { StorageService } from '../services/storageService';
+import { StorageService } from '../services/StorageService';
 import { Constants } from '../services/Constants';
 import { Toaster } from '../services/ToasterService';
 import './Register.scss'
