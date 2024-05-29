@@ -1,0 +1,13 @@
+.login-component {
+  .login-form {
+    display: flex;
+    gap: 20px;
+  }
+
+  .register-link {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 48px;
+  }
+}

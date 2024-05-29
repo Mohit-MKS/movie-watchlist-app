@@ -13,7 +13,7 @@ type UserContext = {
 
 type Action = { type: 'LOGIN'; payload: IUser | null }
   | { type: 'REGISTER'; payload: any }
-  | { type: 'LOGOUT' }
+  | { type: 'LOGOUT'; payload: null }
   | { type: 'ADD_TO_WATCHLIST'; payload: any }
   | { type: 'REMOVE_FROM_WATCHLIST'; payload: string }
   | { type: 'LOAD_WATCHLIST'; payload: any[] };

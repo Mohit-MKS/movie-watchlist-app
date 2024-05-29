@@ -1,5 +1,4 @@
 import localForage from "localforage";
-import { IUser } from "../models/user.model";
 
 export class StorageService {
 
@@ -7,7 +6,7 @@ export class StorageService {
     return localForage.setItem(key, value)
   }
 
-  getItem(key: string): Promise<{ [key: string]: IUser } | null> {
+  getItem(key: string): Promise<{ [key: string]: unknown } | null> {
     return localForage.getItem(key)
   }
 

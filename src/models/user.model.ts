@@ -3,4 +3,8 @@ interface IUser {
   email: string
 }
 
-export type { IUser }
+interface IUsersObj {
+  [key: string]: IUser
+}
+
+export type { IUser, IUsersObj }
