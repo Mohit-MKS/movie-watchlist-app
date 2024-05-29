@@ -16,7 +16,7 @@ const Watchlist = () => {
       <div className="row">
         {state.watchlist?.length > 0 ? (
           state.watchlist.map(movie => (
-            <div key={movie.imdbID} className="my-2 col-md-3 col-sm-12">
+            <div key={movie.imdbID} className="my-2 col-sm-12 col-md-4 col-lg-3 col-xl-2">
               <div className="movie-card">
                 <Link to={`/movie/${movie.imdbID}`}>
                   <img src={movie.Poster} alt={movie.Title} className="w-100" />
