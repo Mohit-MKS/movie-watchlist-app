@@ -3,7 +3,7 @@ import defaultUserImage from "../assets/default-user.svg"; // Assuming you have 
 import "./Sidebar.scss";
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import { StorageService } from "../services/storageService";
+import { StorageService } from "../services/StorageService";
 import { Constants } from "../services/Constants";
 import { useAppContext } from "../contexts/Contexts";
 

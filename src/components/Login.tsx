@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { StorageService } from '../services/storageService';
+import { StorageService } from '../services/StorageService';
 import { Constants } from '../services/Constants';
 import { Toaster } from '../services/ToasterService';
 import { IUser } from '../models/user.model';

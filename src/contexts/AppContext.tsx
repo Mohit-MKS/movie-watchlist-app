@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect, useState } from "react";
 import { Action, UserContext, State } from "../models/app-context.model";
-import { StorageService } from "../services/storageService";
+import { StorageService } from "../services/StorageService";
 import { Constants } from "../services/Constants";
 import { IUser } from "../models/user.model";
 import { IMovie, IWatchListObj } from "../models/movies.model";
