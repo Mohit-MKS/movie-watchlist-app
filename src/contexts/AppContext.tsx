@@ -50,39 +50,37 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [loading, setLoading] = useState(true);
   const [watchLists, setWatchLists] = useState<{ [key: string]: unknown; }>({});
 
-
+  const setUserWatchList = async (user: IUser) => {
+    const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY) as IWatchListObj;
+    setWatchLists(storedWatchlist)
+    if (storedWatchlist) {
+      dispatch({
+        type: "LOAD_WATCHLIST",
+        payload: storedWatchlist[user.email] as IMovie[],
+      });
+    }
+  }
 
   useEffect(() => {
-    async function loadIntialData() {
+    const loadInitialData = async () => {
       const loginUser = await storage.getItem(Constants.LOGIN_USER_KEY) as unknown as IUser;
-      const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY) as IWatchListObj;
-      setWatchLists(storedWatchlist)
-
       if (loginUser) {
         dispatch({ type: "LOGIN", payload: loginUser });
-      }
-
-      if (storedWatchlist && loginUser) {
-        dispatch({
-          type: "LOAD_WATCHLIST",
-          payload: storedWatchlist[loginUser.email] as IMovie[],
-        });
+        await setUserWatchList(loginUser)
       }
       setLoading(false)
     }
-    loadIntialData();
-
+    loadInitialData();
   }, []);
 
   useEffect(() => {
     async function updateUserData() {
       if (state.user) {
         await storage.setItem(Constants.LOGIN_USER_KEY, state.user);
-        const updatedWatchLists = { ...watchLists, [state.user.email]: state.watchlist };
-        // setWatchLists(updatedWatchLists);
-        console.log('looop');
-        
-        await storage.setItem(Constants.WATCHLIST_KEY, updatedWatchLists);
+        if (state.watchlist && state.watchlist.length) {
+          const updatedWatchLists = { ...watchLists, [state.user.email]: state.watchlist };
+          await storage.setItem(Constants.WATCHLIST_KEY, updatedWatchLists);
+        }
       } else {
         await storage.removeItem(Constants.LOGIN_USER_KEY);
       }
@@ -90,6 +88,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     updateUserData();
 
   }, [state.user, state.watchlist, watchLists]);
+
+  useEffect(() => {
+    const updateUserWatchList = async () => {
+      if (state.user) {
+        await setUserWatchList(state.user)
+      }
+    }
+    updateUserWatchList();
+  }, [state.user]);
 
   return (
     <AppContext.Provider value={{ state, dispatch, loading }}>
