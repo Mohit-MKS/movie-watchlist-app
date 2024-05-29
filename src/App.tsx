@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>,
+    <BrowserRouter>
       <ToastContainer position="bottom-right"
         autoClose={2000}
         hideProgressBar={false}
