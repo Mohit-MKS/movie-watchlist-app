@@ -1,12 +1,10 @@
 
-import { useContext } from 'react';
-import { AppContext } from '../contexts/AppContext';
-import { UserContext } from '../models/app-context.model';
 import { Link } from 'react-router-dom';
 import './Watchlist.scss'
+import { useAppContext } from '../contexts/Contexts';
 
 const Watchlist = () => {
-  const { state, dispatch } = useContext(AppContext) as UserContext;
+  const { state, dispatch } = useAppContext();
 
   const removeFromWatchlist = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_WATCHLIST', payload: id });

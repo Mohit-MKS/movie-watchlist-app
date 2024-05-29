@@ -1,25 +1,26 @@
-import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import defaultUserImage from "../assets/default-user.svg"; // Assuming you have a default user image
 import "./Sidebar.scss";
-import { AppContext } from "../contexts/AppContext";
-import { UserContext } from "../models/app-context.model";
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import { StorageService } from "../services/storageService";
 import { Constants } from "../services/Constants";
+import { useAppContext } from "../contexts/Contexts";
 
 const storage = new StorageService
 
 
 const Sidebar = () => {
-  const { state, dispatch } = useContext(AppContext) as UserContext;
+  const { state, dispatch } = useAppContext();
   const navigate = useNavigate();
 
 
   const handleLogoutClick = async () => {
+    const watchLists = await storage.getItem(Constants.WATCHLIST_KEY)
+
     await storage.removeItem(Constants.LOGIN_USER_KEY)
     dispatch({ type: 'LOGOUT', payload: null });
-    navigate('/');
+    navigate('/login');
   }
 
   return (

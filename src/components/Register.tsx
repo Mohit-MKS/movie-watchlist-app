@@ -4,6 +4,7 @@ import { StorageService } from '../services/storageService';
 import { Constants } from '../services/Constants';
 import { Toaster } from '../services/ToasterService';
 import './Register.scss'
+import { Link, useNavigate } from 'react-router-dom';
 
 const storage = new StorageService;
 const toaster = new Toaster
@@ -13,6 +14,7 @@ const Register = () => {
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     const users: IUsersObj | null = await storage.getItem(Constants.USERS_KEY) as IUsersObj;
@@ -25,9 +27,8 @@ const Register = () => {
     }
     else {
       await storage.setItem(Constants.USERS_KEY, { [email]: { name: name, email: email } })
-
+      navigate('/login');
     }
-    console.log(users)
   };
 
   return (
@@ -49,6 +50,11 @@ const Register = () => {
           placeholder="Email"
         />
         <button className='btn btn-primary' onClick={handleRegister}>Register</button>
+      </div>
+
+      <div className="login-link">
+        <span>Already have an account!</span>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );

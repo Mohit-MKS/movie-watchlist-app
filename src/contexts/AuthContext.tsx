@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, ReactNode, ReactElement, useContext } from "react";
+import React, { createContext, useReducer, useEffect, ReactNode, ReactElement } from "react";
 import { AuthAction, AuthState } from "../models/auth-context.model";
 import { StorageService } from "../services/storageService";
 import { Constants } from "../services/Constants";
@@ -24,7 +24,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   }
 };
 
-const AuthContext = createContext<{
+export const AuthContext = createContext<{
   state: AuthState;
   dispatch: React.Dispatch<AuthAction>;
 } | undefined>(undefined);
@@ -58,12 +58,6 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }): ReactEle
   );
 };
 
-const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
 
-export { AuthProvider, useAuth };
+
+export { AuthProvider };

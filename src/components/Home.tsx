@@ -1,13 +1,13 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import apiService from "../services/ApiService";
 import { ApiEndpoints } from "../services/ApiEndpoints";
 import { IMovie } from "../models/movies.model";
-import { AppContext } from "../contexts/AppContext";
-import { UserContext } from "../models/app-context.model";
+
 import './Home.scss'
 import { Toaster } from "../services/ToasterService";
 import { Pagination } from "@mui/material";
+import { useAppContext } from "../contexts/Contexts";
 
 const toaster = new Toaster
 
@@ -15,8 +15,7 @@ const Home = () => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [totalPage, setTotalPage] = useState<number>();
-  const { state, dispatch } = useContext(AppContext) as UserContext;
-
+  const { state, dispatch } = useAppContext();
 
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
@@ -32,7 +31,7 @@ const Home = () => {
 
   };
 
-  const addToWatchlist = (movie: IMovie) => {
+  const addToWatchlist = async (movie: IMovie) => {
     // Check if movie is already in watchlist
     if (!state.watchlist.find(m => m.imdbID === movie?.imdbID)) {
       dispatch({ type: 'ADD_TO_WATCHLIST', payload: movie });

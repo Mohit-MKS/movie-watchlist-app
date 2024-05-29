@@ -4,16 +4,16 @@ import { StorageService } from '../services/storageService';
 import { Constants } from '../services/Constants';
 import { Toaster } from '../services/ToasterService';
 import { IUser } from '../models/user.model';
-import { useAuth } from '../contexts/AuthContext';
 
 import './Login.scss'
+import { useAppContext } from '../contexts/Contexts';
 
 const storage = new StorageService
 const toaster = new Toaster
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const { dispatch } = useAuth();
+  const { dispatch } = useAppContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

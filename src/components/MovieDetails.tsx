@@ -1,19 +1,18 @@
 // src/components/MovieDetails.js
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AppContext } from '../contexts/AppContext';
-import { UserContext } from '../models/app-context.model';
 import apiService from '../services/ApiService';
 import { ApiEndpoints } from '../services/ApiEndpoints';
-import { IMovieDetails } from '../models/movies.model';
+import { IMovie, IMovieDetails } from '../models/movies.model';
 
 import './MovieDetails.scss'
+import { useAppContext } from '../contexts/Contexts';
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState<IMovieDetails>();
-  const { state, dispatch } = useContext(AppContext) as UserContext;
+  const { state, dispatch } = useAppContext();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -26,7 +25,7 @@ const MovieDetails = () => {
   const addToWatchlist = () => {
     // Check if movie is already in watchlist
     if (!state.watchlist.find(m => m.imdbID === movieDetails?.imdbID)) {
-      dispatch({ type: 'ADD_TO_WATCHLIST', payload: movieDetails });
+      dispatch({ type: 'ADD_TO_WATCHLIST', payload: movieDetails as IMovie });
     }
   };
 

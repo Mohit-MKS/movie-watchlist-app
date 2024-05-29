@@ -8,12 +8,16 @@ import MovieDetails from './components/MovieDetails';
 import Watchlist from './components/Watchlist';
 import NotFound from './components/NotFound';
 import Register from './components/Register';
-import { useAuth } from './contexts/AuthContext';
+import { useAppContext } from './contexts/Contexts';
 
 function App() {
 
-  const { state } = useAuth();
+  const { state, loading } = useAppContext();
   const { user } = state;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <BrowserRouter>,
@@ -35,7 +39,8 @@ function App() {
             <Sidebar />
             <div className="content">
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/movie/:id" element={<MovieDetails />} />
                 <Route path="/watchlist" element={<Watchlist />} />
                 <Route path="*" element={<NotFound />} />
@@ -46,9 +51,10 @@ function App() {
         ) : (
           <div className="auth">
             <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="*" element={<Navigate to="/login" />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         )}

@@ -1,15 +1,18 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useState } from "react";
 import { Action, UserContext, State } from "../models/app-context.model";
+import { StorageService } from "../services/storageService";
+import { Constants } from "../services/Constants";
+import { IUser } from "../models/user.model";
 
 const initialState: State = {
   user: null,
   watchlist: [],
 };
 
+const storage = new StorageService
+
 // Reducer function
 const reducer = (state: State, action: Action): State => {
-  console.log(state, action);
-
   switch (action.type) {
     case "LOGIN":
       return { ...state, user: action.payload };
@@ -43,33 +46,44 @@ export const AppContext = createContext<UserContext | undefined>(undefined);
 // AppProvider component
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }): React.ReactNode => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedWatchlist = localStorage.getItem("watchlist");
-    if (storedUser) {
-      dispatch({ type: "LOGIN", payload: JSON.parse(storedUser) });
-    }
+  const [loading, setLoading] = useState(true);
 
-    if (storedWatchlist) {
-      dispatch({
-        type: "LOAD_WATCHLIST",
-        payload: JSON.parse(storedWatchlist),
-      });
+
+  useEffect(() => {
+    async function loadIntialData() {
+      const loginUser = await storage.getItem(Constants.LOGIN_USER_KEY) as unknown as IUser;
+      const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY);
+      if (loginUser) {
+        dispatch({ type: "LOGIN", payload: loginUser });
+      }
+
+      if (storedWatchlist && loginUser) {
+        dispatch({
+          type: "LOAD_WATCHLIST",
+          payload: storedWatchlist[loginUser.email] as [],
+        });
+      }
+      setLoading(false)
     }
+    loadIntialData();
+
   }, []);
 
   useEffect(() => {
-    if (state.user) {
-      localStorage.setItem("user", JSON.stringify(state.user));
-    } else {
-      localStorage.removeItem("user");
+    async function updateUserData() {
+      if (state.user) {
+        await storage.setItem(Constants.LOGIN_USER_KEY, state.user);
+      } else {
+        await storage.removeItem(Constants.LOGIN_USER_KEY);
+      }
+      storage.setItem(Constants.WATCHLIST_KEY, state.watchlist);
     }
+    updateUserData();
 
-    localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
   }, [state.user, state.watchlist]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch, loading }}>
       {children}
     </AppContext.Provider>
   );
