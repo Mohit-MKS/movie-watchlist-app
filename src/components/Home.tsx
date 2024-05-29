@@ -5,11 +5,8 @@ import { ApiEndpoints } from "../services/ApiEndpoints";
 import { IMovie } from "../models/movies.model";
 
 import './Home.scss'
-import { Toaster } from "../services/ToasterService";
 import { Pagination } from "@mui/material";
 import { useAppContext } from "../contexts/Contexts";
-
-const toaster = new Toaster
 
 const Home = () => {
   const [query, setQuery] = useState("");
@@ -44,7 +41,7 @@ const Home = () => {
   return (
     <div className="home-component">
       <h2>Search Movies</h2>
-      <form className="d-flex gap-2" onSubmit={(event) => { handleSearch(event), toaster.success('testing') }}>
+      <form className="d-flex gap-2" onSubmit={(event) => { handleSearch(event) }}>
         <input type="text" className="form-control" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Enter movie title" required />
         <button type="submit" className="btn btn-outline-success">Search</button>
       </form>
