@@ -1,3 +1,3 @@
 export class ApiEndpoints {
-  static readonly baseUrl = 'http://www.omdbapi.com';
+  static readonly baseUrl = 'https://www.omdbapi.com';
 }

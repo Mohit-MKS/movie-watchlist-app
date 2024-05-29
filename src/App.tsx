@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, HashRouter, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.scss'
 import Sidebar from './components/Sidebar';
@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer position="bottom-right"
         autoClose={2000}
         hideProgressBar={false}
@@ -74,7 +74,7 @@ function App() {
             </Routes>
           </div>
         </div> */}
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
