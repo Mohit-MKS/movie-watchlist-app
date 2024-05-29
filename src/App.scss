@@ -18,6 +18,7 @@
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
+    min-height: 50vh;
 
     .content {
       margin-left: 0;
