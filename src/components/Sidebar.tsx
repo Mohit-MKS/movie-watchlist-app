@@ -3,9 +3,9 @@ import defaultUserImage from "../assets/default-user.svg"; // Assuming you have 
 import "./Sidebar.scss";
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import { StorageService } from "../services/StorageService";
 import { Constants } from "../services/Constants";
 import { useAppContext } from "../contexts/Contexts";
+import { StorageService } from "../services/StorageService";
 
 const storage = new StorageService
 
