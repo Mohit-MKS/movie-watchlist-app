@@ -37,4 +37,8 @@ interface IMovieDetails {
   Response: string
 }
 
-export type { IMovie, IMovieDetails }
+interface IWatchListObj {
+  [key: string]: IMovie[]
+}
+
+export type { IMovie, IMovieDetails, IWatchListObj }

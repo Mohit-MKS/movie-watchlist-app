@@ -17,6 +17,15 @@ const Sidebar = () => {
 
   const handleLogoutClick = async () => {
     const watchLists = await storage.getItem(Constants.WATCHLIST_KEY)
+    if (watchLists && watchLists[state.user?.email as string]) {
+      watchLists[state.user?.email as string] = state.watchlist
+      await storage.setItem(Constants.WATCHLIST_KEY, watchLists)
+    } else {
+      const watchlists = {
+        [state.user?.email as string]: state.watchlist
+      }
+      await storage.setItem(Constants.WATCHLIST_KEY, watchlists)
+    }
 
     await storage.removeItem(Constants.LOGIN_USER_KEY)
     dispatch({ type: 'LOGOUT', payload: null });

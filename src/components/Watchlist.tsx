@@ -14,7 +14,7 @@ const Watchlist = () => {
     <div className='watchlist-component'>
       <h2>My Watchlist</h2>
       <div className="row">
-        {state.watchlist.length > 0 ? (
+        {state.watchlist?.length > 0 ? (
           state.watchlist.map(movie => (
             <div key={movie.imdbID} className="my-2 col-md-3 col-sm-12">
               <div className="movie-card">

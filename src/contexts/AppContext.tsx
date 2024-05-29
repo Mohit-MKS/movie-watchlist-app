@@ -3,6 +3,7 @@ import { Action, UserContext, State } from "../models/app-context.model";
 import { StorageService } from "../services/storageService";
 import { Constants } from "../services/Constants";
 import { IUser } from "../models/user.model";
+import { IMovie, IWatchListObj } from "../models/movies.model";
 
 const initialState: State = {
   user: null,
@@ -47,12 +48,16 @@ export const AppContext = createContext<UserContext | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }): React.ReactNode => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(true);
+  const [watchLists, setWatchLists] = useState<{ [key: string]: unknown; }>({});
+
 
 
   useEffect(() => {
     async function loadIntialData() {
       const loginUser = await storage.getItem(Constants.LOGIN_USER_KEY) as unknown as IUser;
-      const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY);
+      const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY) as IWatchListObj;
+      setWatchLists(storedWatchlist)
+
       if (loginUser) {
         dispatch({ type: "LOGIN", payload: loginUser });
       }
@@ -60,7 +65,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (storedWatchlist && loginUser) {
         dispatch({
           type: "LOAD_WATCHLIST",
-          payload: storedWatchlist[loginUser.email] as [],
+          payload: storedWatchlist[loginUser.email] as IMovie[],
         });
       }
       setLoading(false)
@@ -73,14 +78,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     async function updateUserData() {
       if (state.user) {
         await storage.setItem(Constants.LOGIN_USER_KEY, state.user);
+        const updatedWatchLists = { ...watchLists, [state.user.email]: state.watchlist };
+        // setWatchLists(updatedWatchLists);
+        console.log('looop');
+        
+        await storage.setItem(Constants.WATCHLIST_KEY, updatedWatchLists);
       } else {
         await storage.removeItem(Constants.LOGIN_USER_KEY);
       }
-      storage.setItem(Constants.WATCHLIST_KEY, state.watchlist);
     }
     updateUserData();
 
-  }, [state.user, state.watchlist]);
+  }, [state.user, state.watchlist, watchLists]);
 
   return (
     <AppContext.Provider value={{ state, dispatch, loading }}>
