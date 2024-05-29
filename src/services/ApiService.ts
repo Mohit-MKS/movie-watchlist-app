@@ -7,6 +7,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const loader: HTMLElement | null = document.querySelector('#app-loader');
+    if (loader) {
+      loader.style.display = 'flex';
+    }
     return {
       ...config,
       params: { ...config.params, apikey: Constants.API_KEY }
@@ -19,9 +23,17 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    const loader: HTMLElement | null = document.querySelector('#app-loader');
+    if (loader) {
+      loader.style.display = 'none';
+    }
     return response;
   },
   (error) => {
+    const loader: HTMLElement | null = document.querySelector('#app-loader');
+    if (loader) {
+      loader.style.display = 'none';
+    }
     if (error.response.status === 401) { /* empty */ }
     return Promise.reject(error);
   }

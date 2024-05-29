@@ -16,7 +16,11 @@ function App() {
   const { user } = state;
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div id="app-loader" style={{ display: 'flex' }}>
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   return (
@@ -34,6 +38,9 @@ function App() {
       />
 
       <div className="app">
+        {<div id="app-loader">
+          <div className="spinner"></div>
+        </div>}
         {user ? (
           <>
             <Sidebar />
