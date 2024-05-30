@@ -43,14 +43,16 @@ const MovieDetails = () => {
               <img className='movie-image' src={movieDetails.Poster} alt={movieDetails.Title} />
             </div>
             <div className='col-md-7 col-lg-8 col-sm-12'>
-              <p><strong>Plot:</strong> {movieDetails.Plot}</p>
-              <p><strong>Year:</strong> {movieDetails.Year}</p>
-              <p><strong>Genre:</strong> {movieDetails.Genre}</p>
-              <p><strong>Director:</strong> {movieDetails.Director}</p>
-              <p><strong>Actors:</strong> {movieDetails.Actors}</p>
-              <p><strong>Plot:</strong> {movieDetails.Plot}</p>
-              <p><strong>Language:</strong> {movieDetails.Language}</p>
-              <p><strong>IMDB Rating:</strong> {movieDetails.imdbRating}</p>
+              <div className="movie-details">
+                <p><strong>Plot:</strong> {movieDetails.Plot}</p>
+                <p><strong>Year:</strong> {movieDetails.Year}</p>
+                <p><strong>Genre:</strong> {movieDetails.Genre}</p>
+                <p><strong>Director:</strong> {movieDetails.Director}</p>
+                <p><strong>Actors:</strong> {movieDetails.Actors}</p>
+                <p><strong>Plot:</strong> {movieDetails.Plot}</p>
+                <p><strong>Language:</strong> {movieDetails.Language}</p>
+                <p><strong>IMDB Rating:</strong> {movieDetails.imdbRating}</p>
+              </div>
               <div className="add-to-watchlist-btn" >
                 {isMovieInWatchlist ? (
                   <span className='added-to-watchlist'>Added to Watchlist</span>
