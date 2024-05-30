@@ -38,9 +38,9 @@ const MovieDetails = () => {
         <div className='card p-2'>
           <h2>{movieDetails.Title}</h2>
           <p>{movieDetails.Year}</p>
-          <div className='d-flex gap-3'>
-            <img src={movieDetails.Poster} alt={movieDetails.Title} />
-            <div>
+          <div className='row'>
+            <img className='col-md-5 col-lg-4 col-sm-12 movie-image' src={movieDetails.Poster} alt={movieDetails.Title} />
+            <div className='col-md-7 col-lg-8 col-sm-12'>
               <p><strong>Plot:</strong> {movieDetails.Plot}</p>
               <p><strong>Year:</strong> {movieDetails.Year}</p>
               <p><strong>Genre:</strong> {movieDetails.Genre}</p>
