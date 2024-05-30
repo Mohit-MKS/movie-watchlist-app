@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import defaultUserImage from "../assets/default-user.svg"; // Assuming you have a default user image
 import "./Sidebar.scss";
 
@@ -43,8 +43,8 @@ const Sidebar = () => {
                 <img src={defaultUserImage} alt="User" className="user-image" />
               </div>
               <ul className="dropdown-menu" aria-labelledby="user-option-dropdown">
-                <li><span className="dropdown-item"><p className="user-name">{state.user.name}</p></span></li>
-                <li><span className="dropdown-item"><LogoutIcon onClick={handleLogoutClick} /></span></li>
+                <span className="dropdown-item"><p className="user-name">{state.user.name}</p></span>
+                <span className="dropdown-item"><LogoutIcon onClick={handleLogoutClick} /></span>
               </ul>
 
               <div className="username-container">
@@ -55,16 +55,12 @@ const Sidebar = () => {
           )}
         </div>
         <div className="sidebar-nav">
-          <li className="nav-item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/watchlist">Watchlist</Link>
-          </li>
+          <NavLink to="/home" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Home</NavLink>
+          <NavLink to="/watchlist" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Watchlist</NavLink>
         </div>
 
       </div>
-    </div>
+    </div >
   );
 };
 

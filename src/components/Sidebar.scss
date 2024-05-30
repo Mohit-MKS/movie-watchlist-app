@@ -16,6 +16,28 @@
     }
   }
 
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 12px;
+
+
+    .nav-item {
+      padding: 4px 12px;
+      border-radius: 4px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 2px solid;
+    }
+
+    .nav-item.active {
+      color: #fff;
+      background: #0d6ef0;
+      border: none;
+    }
+  }
+
 
   .user-info {
     position: absolute;
@@ -112,7 +134,7 @@
       flex-direction: row;
     }
 
-    .sidebar-nav li {
+    .sidebar-nav span {
       padding: 15px;
     }
   }

@@ -39,7 +39,9 @@ const MovieDetails = () => {
           <h2>{movieDetails.Title}</h2>
           <p>{movieDetails.Year}</p>
           <div className='row'>
-            <img className='col-md-5 col-lg-4 col-sm-12 movie-image' src={movieDetails.Poster} alt={movieDetails.Title} />
+            <div className='col-md-5 col-lg-4 col-sm-12 '>
+              <img className='movie-image' src={movieDetails.Poster} alt={movieDetails.Title} />
+            </div>
             <div className='col-md-7 col-lg-8 col-sm-12'>
               <p><strong>Plot:</strong> {movieDetails.Plot}</p>
               <p><strong>Year:</strong> {movieDetails.Year}</p>
