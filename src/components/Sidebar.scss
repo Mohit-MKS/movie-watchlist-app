@@ -9,13 +9,13 @@
     background-color: #333;
     padding-top: 20px;
     color: #fff;
+
+    .sidebar-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
   }
 
-  .sidebar-header {
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 10px;
-  }
 
   .user-info {
     position: absolute;
@@ -29,10 +29,15 @@
     box-shadow: 0rem 0rem 5px;
   }
 
-  .user-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+  .dropdown-menu {
+    min-width: fit-content;
+  }
+
+  .username-container {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
   }
 
   .user-name {
@@ -41,6 +46,29 @@
     margin-bottom: 0;
   }
 
+
+
+  .user-dropdown-btn {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid;
+    margin: 4px 0;
+
+    .user-image {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .dropdown-menu {
+      display: none;
+    }
+  }
+
+
+
   @media (max-width: 768px) {
     .sidebar {
       width: 100%;
@@ -48,12 +76,35 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      position: static;
+      position: relative;
     }
 
     .sidebar-header {
-      margin-bottom: 0px;
-      padding: 0px;
+      display: flex;
+      position: relative;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 0 12px;
+
+      .user-info {
+        box-shadow: none !important;
+        position: relative !important;
+        cursor: pointer;
+        justify-content: end !important;
+        padding: 0 !important;
+
+
+        .user-dropdown-btn {
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid;
+        }
+
+        .username-container {
+          display: none !important;
+        }
+
+      }
     }
 
     .sidebar-nav {
@@ -61,12 +112,8 @@
       flex-direction: row;
     }
 
-    .sidebar li {
+    .sidebar-nav li {
       padding: 15px;
-    }
-
-    .sidebar .user-info {
-      padding: 10px;
     }
   }
 }

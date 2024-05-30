@@ -1,17 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import './index.scss'
 import App from './App.tsx';
-// import { AuthProvider } from './contexts/AuthContext.tsx';
 import { AppProvider } from './contexts/AppContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <AuthProvider> */}
-      <AppProvider>
-        <App />
-      </AppProvider>
-    {/* </AuthProvider> */}
+    <AppProvider>
+      <App />
+    </AppProvider>
   </React.StrictMode>,
 )

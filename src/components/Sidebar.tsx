@@ -37,6 +37,22 @@ const Sidebar = () => {
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Watchlist</h2>
+          {state.user?.email && (
+            <div className="user-info dropdown">
+              <div className="user-dropdown-btn" id="user-option-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src={defaultUserImage} alt="User" className="user-image" />
+              </div>
+              <ul className="dropdown-menu" aria-labelledby="user-option-dropdown">
+                <li><span className="dropdown-item"><p className="user-name">{state.user.name}</p></span></li>
+                <li><span className="dropdown-item"><LogoutIcon onClick={handleLogoutClick} /></span></li>
+              </ul>
+
+              <div className="username-container">
+                <p className="user-name">{state.user.name}</p>
+                <LogoutIcon onClick={handleLogoutClick} />
+              </div>
+            </div>
+          )}
         </div>
         <div className="sidebar-nav">
           <li className="nav-item">
@@ -47,15 +63,6 @@ const Sidebar = () => {
           </li>
         </div>
 
-        {state.user?.email && (
-          <div className="user-info">
-            <div className="d-flex align-items-center">
-              <img src={defaultUserImage} alt="User" className="user-image" />
-              <p className="user-name">{state.user.name}</p>
-            </div>
-            <LogoutIcon onClick={handleLogoutClick} />
-          </div>
-        )}
       </div>
     </div>
   );
