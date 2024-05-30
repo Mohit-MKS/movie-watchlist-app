@@ -20,7 +20,6 @@ const Login = () => {
     e.preventDefault();
     const users = await storage.getItem(Constants.USERS_KEY)
     if (users && users[email]) {
-      await storage.setItem(Constants.LOGIN_USER_KEY, users[email])
       dispatch({ type: 'LOGIN', payload: users[email] as IUser });
       navigate('/');
     }

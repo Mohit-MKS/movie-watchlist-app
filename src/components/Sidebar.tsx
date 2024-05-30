@@ -11,7 +11,7 @@ const storage = new StorageService
 
 
 const Sidebar = () => {
-  const { state, dispatch } = useAppContext();
+  const { state,dispatch } = useAppContext();
   const navigate = useNavigate();
 
 
@@ -26,7 +26,6 @@ const Sidebar = () => {
       }
       await storage.setItem(Constants.WATCHLIST_KEY, watchlists)
     }
-
     await storage.removeItem(Constants.LOGIN_USER_KEY)
     dispatch({ type: 'LOGOUT', payload: null });
     navigate('/login');
