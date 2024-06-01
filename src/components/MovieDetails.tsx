@@ -47,9 +47,9 @@ const MovieDetails = () => {
                 <p><strong>Plot:</strong> {movieDetails.Plot}</p>
                 <p><strong>Year:</strong> {movieDetails.Year}</p>
                 <p><strong>Genre:</strong> {movieDetails.Genre}</p>
+                <p><strong>Writer:</strong> {movieDetails.Writer}</p>
                 <p><strong>Director:</strong> {movieDetails.Director}</p>
                 <p><strong>Actors:</strong> {movieDetails.Actors}</p>
-                <p><strong>Plot:</strong> {movieDetails.Plot}</p>
                 <p><strong>Language:</strong> {movieDetails.Language}</p>
                 <p><strong>IMDB Rating:</strong> {movieDetails.imdbRating}</p>
               </div>
