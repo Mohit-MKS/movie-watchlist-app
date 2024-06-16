@@ -6,6 +6,10 @@ interface ISearchContext {
   setQuery: Dispatch<SetStateAction<string>>;
   movies: IMovie[];
   setMovies: Dispatch<SetStateAction<IMovie[]>>;
+  totalPage: number;
+  setTotalPage: Dispatch<SetStateAction<number>>;
+  currentPage: number;
+  setcurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export type { ISearchContext }

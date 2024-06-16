@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import apiService from "../services/ApiService";
 import { ApiEndpoints } from "../services/ApiEndpoints";
@@ -9,10 +9,9 @@ import { Pagination } from "@mui/material";
 import { useAppContext, useSearchContext } from "../contexts/Contexts";
 
 const Home = () => {
-  const [totalPage, setTotalPage] = useState<number>();
   const { state, dispatch } = useAppContext();
 
-  const { query, setQuery, movies, setMovies } = useSearchContext()
+  const { query, setQuery, movies, setMovies, totalPage, setTotalPage, currentPage, setcurrentPage } = useSearchContext()
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +22,7 @@ const Home = () => {
 
   const handlePageChange = async (_event: React.ChangeEvent<unknown>, value: number) => {
     const response = await apiService.doRequest('get', `${ApiEndpoints.baseUrl}?s=${query}&page=${value}`);
+    setcurrentPage(value)
     setMovies(response.data.Search);
 
   };
@@ -64,7 +64,7 @@ const Home = () => {
             </div>
           ))}
       </div>
-      {totalPage && <Pagination count={totalPage} onChange={handlePageChange} />}
+      {!!totalPage && <Pagination count={totalPage} page={currentPage} onChange={handlePageChange} />}
 
     </div>
   );
