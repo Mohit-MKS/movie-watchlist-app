@@ -6,7 +6,6 @@ import { Toaster } from '../services/ToasterService';
 import './Register.scss'
 import { Link, useNavigate } from 'react-router-dom';
 
-const storage = new StorageService;
 const toaster = new Toaster
 
 
@@ -17,10 +16,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    const users: IUsersObj | null = await storage.getItem(Constants.USERS_KEY) as IUsersObj;
+    const users: IUsersObj | null = await StorageService.getItem(Constants.USERS_KEY) as IUsersObj;
     if (users) {
       if (!users[email]) {
-        storage.setItem(Constants.USERS_KEY, { ...users, [email]: { name: name, email: email } }).then((val) => {
+        StorageService.setItem(Constants.USERS_KEY, { ...users, [email]: { name: name, email: email } }).then((val) => {
           if (val) {
             toaster.success('User registered successfully')
             navigate('/login');
@@ -34,7 +33,7 @@ const Register = () => {
       }
     }
     else {
-      storage.setItem(Constants.USERS_KEY, { [email]: { name: name, email: email } }).then((val) => {
+      StorageService.setItem(Constants.USERS_KEY, { [email]: { name: name, email: email } }).then((val) => {
         if (val) {
           toaster.success('User registered successfully')
           navigate('/login');

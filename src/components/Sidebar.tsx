@@ -7,8 +7,6 @@ import { Constants } from "../services/Constants";
 import { useAppContext } from "../contexts/Contexts";
 import { StorageService } from "../services/StorageService";
 
-const storage = new StorageService
-
 
 const Sidebar = () => {
   const { state,dispatch } = useAppContext();
@@ -16,17 +14,17 @@ const Sidebar = () => {
 
 
   const handleLogoutClick = async () => {
-    const watchLists = await storage.getItem(Constants.WATCHLIST_KEY)
+    const watchLists = await StorageService.getItem(Constants.WATCHLIST_KEY)
     if (watchLists && watchLists[state.user?.email as string]) {
       watchLists[state.user?.email as string] = state.watchlist
-      await storage.setItem(Constants.WATCHLIST_KEY, watchLists)
+      await StorageService.setItem(Constants.WATCHLIST_KEY, watchLists)
     } else {
       const watchlists = {
         [state.user?.email as string]: state.watchlist
       }
-      await storage.setItem(Constants.WATCHLIST_KEY, watchlists)
+      await StorageService.setItem(Constants.WATCHLIST_KEY, watchlists)
     }
-    await storage.removeItem(Constants.LOGIN_USER_KEY)
+    await StorageService.removeItem(Constants.LOGIN_USER_KEY)
     dispatch({ type: 'LOGOUT', payload: null });
     navigate('/login');
   }

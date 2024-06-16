@@ -8,7 +8,6 @@ import { IUser } from '../models/user.model';
 import './Login.scss'
 import { useAppContext } from '../contexts/Contexts';
 
-const storage = new StorageService
 const toaster = new Toaster
 
 const Login = () => {
@@ -18,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const users = await storage.getItem(Constants.USERS_KEY)
+    const users = await StorageService.getItem(Constants.USERS_KEY)
     if (users && users[email]) {
       dispatch({ type: 'LOGIN', payload: users[email] as IUser });
       navigate('/');
