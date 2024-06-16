@@ -6,8 +6,6 @@ import { Toaster } from '../services/ToasterService';
 import './Register.scss'
 import { Link, useNavigate } from 'react-router-dom';
 
-const toaster = new Toaster
-
 
 const Register = () => {
 
@@ -21,25 +19,25 @@ const Register = () => {
       if (!users[email]) {
         StorageService.setItem(Constants.USERS_KEY, { ...users, [email]: { name: name, email: email } }).then((val) => {
           if (val) {
-            toaster.success('User registered successfully')
+            Toaster.success('User registered successfully')
             navigate('/login');
           }
         }, () => {
-          toaster.error('Something went wrong, Please try again')
+          Toaster.error('Something went wrong, Please try again')
         });
       }
       else {
-        toaster.error('User already registered')
+        Toaster.error('User already registered')
       }
     }
     else {
       StorageService.setItem(Constants.USERS_KEY, { [email]: { name: name, email: email } }).then((val) => {
         if (val) {
-          toaster.success('User registered successfully')
+          Toaster.success('User registered successfully')
           navigate('/login');
         }
       }, () => {
-        toaster.error('Something went wrong, Please try again')
+        Toaster.error('Something went wrong, Please try again')
       });
     }
   };

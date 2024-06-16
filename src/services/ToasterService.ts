@@ -2,20 +2,21 @@
 import { toast } from 'react-toastify';
 
 export class Toaster {
-  readonly success = (message: string) => {
+  static readonly success = (message: string) => {
     toast.success(message);
   };
 
-  readonly error = (message: string) => {
+  static readonly error = (message: string) => {
     toast.error(message);
   };
 
-  readonly warning = (message: string) => {
+  static readonly warning = (message: string) => {
     toast.warn(message);
   };
 
-  readonly info = (message: string) => {
+  static readonly info = (message: string) => {
     toast.info(message);
   };
+
 }
 

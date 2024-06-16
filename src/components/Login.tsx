@@ -8,7 +8,6 @@ import { IUser } from '../models/user.model';
 import './Login.scss'
 import { useAppContext } from '../contexts/Contexts';
 
-const toaster = new Toaster
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +22,7 @@ const Login = () => {
       navigate('/');
     }
     else {
-      toaster.error('User not found')
+      Toaster.error('User not found')
     }
   };
 
