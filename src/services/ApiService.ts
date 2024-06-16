@@ -41,8 +41,8 @@ axiosInstance.interceptors.response.use(
 
 const apiService = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  doRequest: async (method: RequestMethod, url: string, body?: any, headers?: AxiosHeaders) => {
-    return axiosInstance.request({ method: method, url: url, data: body, headers: headers })
+  doRequest: async (method: RequestMethod, url: string, headers?: AxiosHeaders, body?: any,) => {
+    return axiosInstance.request({ method: method, url: url, headers: headers, data: body })
   },
 
 };

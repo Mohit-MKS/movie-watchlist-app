@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import apiService from '../services/ApiService';
 import { ApiEndpoints } from '../services/ApiEndpoints';
 import { IMovie, IMovieDetails } from '../models/movies.model';
@@ -34,7 +35,11 @@ const MovieDetails = () => {
 
   return (
     <div className='movie-detail-component'>
-      {movieDetails ? (
+      {movieDetails && (<>
+        <div className="d-flex gap-1 align-items-center mb-2">
+          <ArrowBackIosIcon className="cursor-pointer" onClick={() => history.back()} />
+          <span className='fs-5 fw-bold'>Movie Details</span>
+        </div>
         <div className='card p-2'>
           <h2>{movieDetails.Title}</h2>
           <p>{movieDetails.Year}</p>
@@ -62,11 +67,8 @@ const MovieDetails = () => {
               </div>
             </div>
           </div>
-
-
         </div>
-      ) : (
-        <p>Loading...</p>
+      </>
       )}
     </div>
   );
