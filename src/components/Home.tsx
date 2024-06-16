@@ -18,6 +18,7 @@ const Home = () => {
     const response = await apiService.doRequest('get', `${ApiEndpoints.baseUrl}?s=${query}`);
     setMovies(response.data.Search);
     setTotalPage(Math.ceil(response.data.totalResults / 10))
+    setcurrentPage(1);
   };
 
   const handlePageChange = async (_event: React.ChangeEvent<unknown>, value: number) => {
