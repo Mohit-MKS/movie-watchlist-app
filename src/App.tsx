@@ -9,6 +9,7 @@ import Watchlist from './components/Watchlist';
 import NotFound from './components/NotFound';
 import Register from './components/Register';
 import { useAppContext } from './contexts/Contexts';
+import { SearchProvider } from './contexts/SearchContext';
 
 function App() {
 
@@ -45,13 +46,15 @@ function App() {
           <>
             <Sidebar />
             <div className="content">
-              <Routes>
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/movie/:id" element={<MovieDetails />} />
-                <Route path="/watchlist" element={<Watchlist />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <SearchProvider>
+                <Routes>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/" element={<Navigate to="/home" />} />
+                  <Route path="/movie/:id" element={<MovieDetails />} />
+                  <Route path="/watchlist" element={<Watchlist />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </SearchProvider>
             </div>
           </>
 

@@ -6,14 +6,13 @@ import { IMovie } from "../models/movies.model";
 
 import './Home.scss'
 import { Pagination } from "@mui/material";
-import { useAppContext } from "../contexts/Contexts";
+import { useAppContext, useSearchContext } from "../contexts/Contexts";
 
 const Home = () => {
-  const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState<IMovie[]>([]);
   const [totalPage, setTotalPage] = useState<number>();
   const { state, dispatch } = useAppContext();
 
+  const { query, setQuery, movies, setMovies } = useSearchContext()
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,7 +49,7 @@ const Home = () => {
           movies.map((movie) => (
             <div key={movie.imdbID} className="my-2 col-sm-12 col-md-4 col-lg-3 col-xl-2">
               <div className="movie-card">
-                <Link to={`/movie/${movie.imdbID}`}>
+                <Link to={`/movie/${movie.imdbID}`} className='flex-grow-1'>
                   <img src={movie.Poster} alt={movie.Title} className="w-100" />
                   <h5>{movie.Title}</h5>
                 </Link>

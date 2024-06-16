@@ -10,7 +10,6 @@ const initialState: State = {
   watchlist: [],
 };
 
-const storage = new StorageService
 
 // Reducer function
 const reducer = (state: State, action: Action): State => {
@@ -52,9 +51,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // will set the login user's watchlist in AppContext
   const setUserWatchList = async (user: IUser) => {
-    const storedWatchlist = await storage.getItem(Constants.WATCHLIST_KEY) as IWatchListObj;
+    const storedWatchlist = await StorageService.getItem(Constants.WATCHLIST_KEY) as IWatchListObj;
     setWatchLists(storedWatchlist)
-    console.trace(storedWatchlist);
     if (storedWatchlist && storedWatchlist[user.email]) {
       dispatch({
         type: "LOAD_WATCHLIST",
@@ -71,7 +69,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const loginUser = await storage.getItem(Constants.LOGIN_USER_KEY) as unknown as IUser;
+      const loginUser = await StorageService.getItem(Constants.LOGIN_USER_KEY) as unknown as IUser;
       if (loginUser) {
         dispatch({ type: "LOGIN", payload: loginUser });
       }
@@ -84,7 +82,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const updateUserWatchlist = async () => {
       if (state.user && (state.watchlist)) {
         const updatedWatchLists = { ...watchLists, [state.user.email]: state.watchlist };
-        await storage.setItem(Constants.WATCHLIST_KEY, updatedWatchLists);
+        await StorageService.setItem(Constants.WATCHLIST_KEY, updatedWatchLists);
       }
     };
     updateUserWatchlist()
@@ -96,7 +94,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     const updateUserData = async () => {
       if (state.user) {
-        await storage.setItem(Constants.LOGIN_USER_KEY, state.user)
+        await StorageService.setItem(Constants.LOGIN_USER_KEY, state.user)
         await setUserWatchList(state.user)
       }
     }
